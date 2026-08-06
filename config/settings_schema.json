@@ -1,5 +1,13 @@
 [
   {
+    "name": "theme_info",
+    "theme_name": "Collection Standard",
+    "theme_author": "David Kaufmann",
+    "theme_version": "1.0.0",
+    "theme_documentation_url": "https://github.com/kaufmann-dev/shopify-theme",
+    "theme_support_email": "david@kaufmann.dev"
+  },
+  {
     "name": "Brand",
     "settings": [
       {
