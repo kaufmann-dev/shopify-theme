@@ -1,0 +1,28 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "settings": {
+        "show_vendor": false
+      },
+      "blocks": {
+        "care": {
+          "type": "details",
+          "settings": {
+            "heading": "Materials and care",
+            "content": "<p>Add care instructions and material details here.</p>"
+          }
+        },
+        "shipping": {
+          "type": "details",
+          "settings": {
+            "heading": "Shipping and returns",
+            "content": "<p>Add your shipping and returns policy here.</p>"
+          }
+        }
+      },
+      "block_order": ["care", "shipping"]
+    }
+  },
+  "order": ["main"]
+}

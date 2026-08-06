@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-list-collections",
+      "settings": {
+        "heading": "Collections",
+        "text": "<p>Browse every collection, then narrow down by fit, color, size, or price.</p>",
+        "collections_per_page": 12
+      }
+    }
+  },
+  "order": ["main"]
+}

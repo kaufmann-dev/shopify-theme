@@ -1,0 +1,54 @@
+<section class="section-space">
+  <div class="page-width">
+    <div class="section-heading">
+      <div class="section-heading__copy">
+        <h1>{{ section.settings.heading | escape }}</h1>
+        {%- if section.settings.text != blank -%}
+          <div class="rte">{{ section.settings.text }}</div>
+        {%- endif -%}
+      </div>
+    </div>
+
+    {%- paginate collections by section.settings.collections_per_page -%}
+      <div class="collection-grid">
+        {%- for collection in collections -%}
+          {% render 'collection-card', collection: collection %}
+        {%- else -%}
+          <div class="empty-state">
+            <h2>{{ 'sections.main_list_collections.empty' | t }}</h2>
+          </div>
+        {%- endfor -%}
+      </div>
+      {% render 'pagination', paginate: paginate %}
+    {%- endpaginate -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collections list",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Collections"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Browse every collection, then narrow down by fit, color, size, or price.</p>"
+    },
+    {
+      "type": "range",
+      "id": "collections_per_page",
+      "min": 6,
+      "max": 30,
+      "step": 3,
+      "label": "Collections per page",
+      "default": 12
+    }
+  ]
+}
+{% endschema %}

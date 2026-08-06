@@ -1,0 +1,23 @@
+{%- liquid
+  assign card_collection = collection
+  assign card_image = card_collection.featured_image
+  if card_image == blank and card_collection.products.first.featured_image != blank
+    assign card_image = card_collection.products.first.featured_image
+  endif
+-%}
+
+<article class="collection-card"{% if block %} {{ block.shopify_attributes }}{% endif %}>
+  <a class="collection-card__link" href="{{ card_collection.url }}">
+    <div class="collection-card__media">
+      {%- if card_image != blank -%}
+        {{ card_image | image_url: width: 1000 | image_tag: loading: 'lazy', widths: '320, 480, 720, 1000', sizes: '(min-width: 901px) 33vw, (min-width: 481px) 50vw, 100vw', alt: card_image.alt | default: card_collection.title }}
+      {%- else -%}
+        {{ 'collection-1' | placeholder_svg_tag: 'collection-card__placeholder' }}
+      {%- endif -%}
+    </div>
+    <div class="collection-card__title">
+      <span>{{ card_collection.title | escape }}</span>
+      <span class="collection-card__count">{{ 'products.facets.product_count' | t: count: card_collection.all_products_count }}</span>
+    </div>
+  </a>
+</article>

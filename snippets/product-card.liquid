@@ -1,0 +1,31 @@
+<article class="product-card">
+  <a class="product-card__link" href="{{ product.url }}">
+    <div class="product-card__media">
+      {%- if product.featured_image != blank -%}
+        {{ product.featured_image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '280, 420, 640, 900', sizes: '(min-width: 901px) 25vw, (min-width: 481px) 50vw, 100vw', alt: product.featured_image.alt | default: product.title }}
+      {%- else -%}
+        {{ 'product-1' | placeholder_svg_tag: 'product-card__placeholder' }}
+      {%- endif -%}
+      <div class="product-card__badges">
+        {%- if settings.show_sold_out_badge and product.available == false -%}
+          <span class="badge">{{ 'products.product.sold_out' | t }}</span>
+        {%- elsif settings.show_sale_badge and product.compare_at_price_max > product.price -%}
+          <span class="badge">{{ 'products.product.on_sale' | t }}</span>
+        {%- endif -%}
+      </div>
+    </div>
+    <div class="product-card__info">
+      <span class="product-card__title">{{ product.title | escape }}</span>
+      <span class="product-card__price">
+        {%- if product.price_varies -%}
+          {{ 'products.product.from_price_html' | t: price: product.price_min | money }}
+        {%- else -%}
+          {{ product.price | money }}
+        {%- endif -%}
+      </span>
+      {%- if settings.show_vendor -%}
+        <span class="product-card__vendor">{{ product.vendor | escape }}</span>
+      {%- endif -%}
+    </div>
+  </a>
+</article>

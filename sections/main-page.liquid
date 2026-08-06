@@ -1,0 +1,14 @@
+<section class="section-space">
+  <div class="page-width">
+    <div class="section-heading__copy">
+      <h1>{{ page.title | escape }}</h1>
+      <div class="rte section-space--compact">{{ page.content }}</div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Page"
+}
+{% endschema %}

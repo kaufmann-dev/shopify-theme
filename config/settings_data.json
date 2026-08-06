@@ -1,0 +1,22 @@
+{
+  "current": {
+    "color_paper": "#ffffff",
+    "color_ink": "#000000",
+    "color_muted": "#595959",
+    "color_accent": "#005fcc",
+    "page_width": 1400,
+    "logo_width": 180,
+    "show_vendor": false,
+    "show_sale_badge": true,
+    "show_sold_out_badge": true
+  },
+  "presets": {
+    "Default": {
+      "color_paper": "#ffffff",
+      "color_ink": "#000000",
+      "color_muted": "#595959",
+      "color_accent": "#005fcc",
+      "page_width": 1400
+    }
+  }
+}

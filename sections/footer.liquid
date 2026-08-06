@@ -1,0 +1,94 @@
+<footer class="site-footer">
+  <div class="site-footer__grid page-width">
+    <div>
+      <div class="site-footer__brand">{{ shop.name | escape }}</div>
+    </div>
+
+    <div>
+      <h2>{{ section.settings.menu_heading | escape }}</h2>
+      <ul class="footer-links">
+        {%- for link in section.settings.menu.links -%}
+          <li><a href="{{ link.url }}">{{ link.title | escape }}</a></li>
+        {%- else -%}
+          <li><a href="{{ routes.collections_url }}">{{ 'sections.footer.collections' | t }}</a></li>
+          <li><a href="{{ routes.search_url }}">{{ 'sections.footer.search' | t }}</a></li>
+        {%- endfor -%}
+      </ul>
+    </div>
+
+    {%- if section.settings.show_newsletter -%}
+      <div>
+        <h2>{{ section.settings.newsletter_heading | escape }}</h2>
+        {%- if section.settings.newsletter_text != blank -%}
+          <p>{{ section.settings.newsletter_text | escape }}</p>
+        {%- endif -%}
+        {%- form 'customer', class: 'newsletter-form-wrapper' -%}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <div class="newsletter-form">
+            <label class="visually-hidden" for="FooterEmail-{{ section.id }}">{{ 'sections.footer.email' | t }}</label>
+            <input
+              id="FooterEmail-{{ section.id }}"
+              type="email"
+              name="contact[email]"
+              value="{{ form.email }}"
+              placeholder="{{ 'sections.footer.email_placeholder' | t }}"
+              autocomplete="email"
+              autocorrect="off"
+              autocapitalize="off"
+              required
+            >
+            <button type="submit">{{ 'sections.footer.subscribe' | t }}</button>
+          </div>
+          {%- if form.posted_successfully? -%}
+            <p class="form-message" tabindex="-1">{{ 'sections.footer.success' | t }}</p>
+          {%- endif -%}
+          {%- if form.errors -%}
+            <div class="form-message" role="alert">{{ form.errors | default_errors }}</div>
+          {%- endif -%}
+        {%- endform -%}
+      </div>
+    {%- endif -%}
+  </div>
+  <div class="site-footer__bottom page-width">
+    &copy; {{ 'now' | date: '%Y' }} {{ shop.name | escape }}
+    {{ powered_by_link }}
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "text",
+      "id": "menu_heading",
+      "label": "Menu heading",
+      "default": "Information"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "footer"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_newsletter",
+      "label": "Show email signup",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "newsletter_heading",
+      "label": "Email signup heading",
+      "default": "Get store updates"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_text",
+      "label": "Email signup text",
+      "default": "New collections and restocks, sent occasionally."
+    }
+  ]
+}
+{% endschema %}

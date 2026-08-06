@@ -1,0 +1,17 @@
+{
+  "type": "footer",
+  "name": "Footer group",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "settings": {
+        "menu_heading": "Information",
+        "menu": "footer",
+        "show_newsletter": true,
+        "newsletter_heading": "Get store updates",
+        "newsletter_text": "New collections and restocks, sent occasionally."
+      }
+    }
+  },
+  "order": ["footer"]
+}

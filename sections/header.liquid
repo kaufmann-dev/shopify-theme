@@ -1,0 +1,57 @@
+<header class="site-header">
+  <div class="site-header__inner page-width">
+    <details class="mobile-menu">
+      <summary aria-label="{{ 'sections.header.menu' | t }}">{{ 'sections.header.menu' | t }}</summary>
+      <nav class="mobile-menu__panel" aria-label="{{ 'sections.header.mobile_navigation' | t }}">
+        <ul class="mobile-menu__links page-width">
+          {%- for link in section.settings.menu.links -%}
+            <li><a href="{{ link.url }}" data-menu-close>{{ link.title | escape }}</a></li>
+          {%- else -%}
+            <li><a href="{{ routes.all_products_collection_url }}" data-menu-close>{{ 'sections.header.shop_all' | t }}</a></li>
+            <li><a href="{{ routes.collections_url }}" data-menu-close>{{ 'sections.header.collections' | t }}</a></li>
+          {%- endfor -%}
+        </ul>
+      </nav>
+    </details>
+
+    <a class="site-header__brand" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }}">
+      {%- if settings.logo != blank -%}
+        {{ settings.logo | image_url: width: settings.logo_width | image_tag: class: 'site-header__logo', widths: '100, 180, 240, 300', width: settings.logo_width, alt: shop.name }}
+      {%- else -%}
+        <span class="site-header__brand-text">{{ shop.name | escape }}</span>
+      {%- endif -%}
+    </a>
+
+    <nav class="desktop-nav" aria-label="{{ 'sections.header.primary_navigation' | t }}">
+      <ul class="site-nav">
+        {%- for link in section.settings.menu.links -%}
+          <li><a href="{{ link.url }}">{{ link.title | escape }}</a></li>
+        {%- else -%}
+          <li><a href="{{ routes.collections_url }}">{{ 'sections.header.collections' | t }}</a></li>
+          <li><a href="{{ routes.all_products_collection_url }}">{{ 'sections.header.shop_all' | t }}</a></li>
+        {%- endfor -%}
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <a class="header-actions__search" href="{{ routes.search_url }}">{{ 'sections.header.search' | t }}</a>
+      <a href="{{ routes.cart_url }}">
+        {{ 'sections.header.cart' | t }}<span class="cart-count" aria-label="{{ 'sections.header.cart_count' | t: count: cart.item_count }}">({{ cart.item_count }})</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    }
+  ]
+}
+{% endschema %}

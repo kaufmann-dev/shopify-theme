@@ -1,0 +1,42 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "heading": "Made to be worn",
+        "text": "<p>Everyday clothing, organized by collection.</p>",
+        "button_label": "Shop collections",
+        "button_link": "shopify://collections"
+      }
+    },
+    "collections": {
+      "type": "featured-collections",
+      "settings": {
+        "heading": "Shop by collection",
+        "text": "<p>Start with the collection that fits your day.</p>",
+        "link_label": "View all collections"
+      },
+      "blocks": {
+        "collection_1": { "type": "collection", "settings": {} },
+        "collection_2": { "type": "collection", "settings": {} },
+        "collection_3": { "type": "collection", "settings": {} }
+      },
+      "block_order": ["collection_1", "collection_2", "collection_3"]
+    },
+    "latest": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "Latest pieces",
+        "products_to_show": 4
+      }
+    },
+    "principles": {
+      "type": "rich-text",
+      "settings": {
+        "heading": "Clothing without the noise",
+        "text": "<p>Built for repeat wear. Clear fits, useful materials, and collections that make finding your next piece simple.</p>"
+      }
+    }
+  },
+  "order": ["hero", "collections", "latest", "principles"]
+}

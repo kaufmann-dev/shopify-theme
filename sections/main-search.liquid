@@ -1,0 +1,50 @@
+<section class="section-space">
+  <div class="page-width">
+    <h1>{{ 'sections.search.title' | t }}</h1>
+    <form class="search-form" action="{{ routes.search_url }}" method="get" role="search">
+      <label class="visually-hidden" for="SearchInput">{{ 'sections.search.label' | t }}</label>
+      <input id="SearchInput" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'sections.search.placeholder' | t }}" autocomplete="off">
+      <input type="hidden" name="type" value="product">
+      <button class="button" type="submit">{{ 'sections.search.submit' | t }}</button>
+    </form>
+
+    {%- if search.performed -%}
+      {%- paginate search.results by section.settings.results_per_page -%}
+        {%- if search.results_count > 0 -%}
+          <p>{{ 'sections.search.results' | t: count: search.results_count, terms: search.terms }}</p>
+          <div class="product-grid section-space--compact">
+            {%- for item in search.results -%}
+              {%- if item.object_type == 'product' -%}
+                {% render 'product-card', product: item %}
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+          {% render 'pagination', paginate: paginate %}
+        {%- else -%}
+          <div class="empty-state">
+            <h2>{{ 'sections.search.no_results' | t }}</h2>
+            <p>{{ 'sections.search.no_results_text' | t: terms: search.terms }}</p>
+            <a class="button button--secondary" href="{{ routes.collections_url }}">{{ 'sections.search.browse_collections' | t }}</a>
+          </div>
+        {%- endif -%}
+      {%- endpaginate -%}
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Search results",
+  "settings": [
+    {
+      "type": "range",
+      "id": "results_per_page",
+      "min": 8,
+      "max": 48,
+      "step": 4,
+      "label": "Results per page",
+      "default": 24
+    }
+  ]
+}
+{% endschema %}
